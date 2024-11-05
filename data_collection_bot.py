@@ -11,15 +11,19 @@ import json
 # from datetime import datetime
 import websockets
 # import pymongo
-
+import os
+from dotenv import load_dotenv
 import pymongo
 import asyncio
 import ssl
 import certifi
 
 ca = certifi.where()
+load_dotenv()
 
-myclient = pymongo.MongoClient("mongodb+srv://aquintel66:j7RTuWouBsjzyRqF@cluster0.arwxp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", tlsCAFile=ca)
+mongo_pass = os.getenv('MONGO_PASS')
+
+myclient = pymongo.MongoClient("mongodb+srv://aquintel66:{mongo_pass}@cluster0.arwxp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", tlsCAFile=ca)
 
 mydb = myclient["mydatabase"]
 static_dataset = mydb["test_static"]
